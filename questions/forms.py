@@ -13,6 +13,17 @@ class QuestionForm(ModelForm):
         }
 
 class CommentForm(ModelForm):
+    answer = forms.ChoiceField(
+        widget = forms.RadioSelect,
+        choices = {"1":"1", "2":"2"},
+    )
+
     class Meta():
         model = Comment
         exclude = ('question', )
+        widgets = {
+            'content':forms.Textarea(attrs={
+                'class': 'form-control', 'rows':'3'
+                })
+        }
+        

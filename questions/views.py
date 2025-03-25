@@ -29,10 +29,12 @@ def index(request):
 def detail(request, id):
     question=Question.objects.get(id=id)
     form = CommentForm()
+    comments = question.comment_set.all()
 
     context = {
         'question':question,
         'form':form,
+        'comments':comments,
     }
     return render(request, 'detail.html', context)
 
@@ -49,3 +51,11 @@ def comment_create(request, question_id):
 
     else:
         return redirect('questions:index')
+
+def progress_view(request):
+    
+    context = {
+        "primary_percent": primary_percent,  # 파란색 진행률
+        "danger_percent": danger_percent,   # 빨간색 진행률
+    }
+    return render(request, "progress.html", context)

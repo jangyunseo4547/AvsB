@@ -8,6 +8,6 @@ class Question(models.Model):
     content2 = models.CharField(max_length = 100)
 
 class Comment(models.Model):
-    answer = models.BooleanField()
+    answer = models.CharField(max_length = 10)
     content = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

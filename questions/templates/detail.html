@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 
 {% block body %}
+    <!-- <div class="progress-stacked" style="height:50px;">
+        <div class="progress-bar bg-primary" role="progressbar" style="width: {{ primary_percent }}%;" 
+            aria-valuenow="{{ primary_percent }}" aria-valuemin="0" aria-valuemax="100">
+            {{ primary_percent }}%
+        </div>
+
+        <div class="progress-bar bg-danger" role="progressbar" style="width: {{ danger_percent }}%;" 
+            aria-valuenow="{{ danger_percent }}" aria-valuemin="0" aria-valuemax="100">
+            {{ danger_percent }}%
+        </div>  -->
+    <!-- </div> -->
     <div class="row my-5">
         <div class="col-sm-6 mb-3 mb-sm-0">
             <div class="card text-bg-primary">
@@ -24,6 +35,25 @@
     <form action="{% url 'questions:comment_create' question.id %}" method="POST">
         {% csrf_token %}
         {{form}}
-        <input type="submit">
+        <input type="submit" class="btn btn-primary mt-3">
     </form>
+    <hr>
+    <h1>Answers</h1>
+    {% for comment in comments %}
+        {% if comment.answer == '1' %}
+        <div class="card bg-primary-subtle mt-3">
+            <div class="card-body">
+                {{comment.answer}}
+                {{comment.content}}
+            </div>
+        </div>
+        {% else %}
+        <div class="card bg-danger-subtle mt-3">
+            <div class="card-body">
+                {{comment.answer}}
+                {{comment.content}}
+            </div>
+        </div>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
