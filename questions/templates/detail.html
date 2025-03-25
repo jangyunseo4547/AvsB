@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="row my-5">
+        <div class="col-sm-6 mb-3 mb-sm-0">
+            <div class="card text-bg-primary">
+                <div class="card-body">
+                    <h5 class="card-title">{{question.title}}</h5>
+                    <p class="card-text">{{question.content1}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="card text-bg-danger">
+                <div class="card-body">
+                    <h5 class="card-title">{{question.title}}</h5>
+                    <p class="card-text">{{question.content2}}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr>
+    <form action="{% url 'questions:comment_create' question.id %}" method="POST">
+        {% csrf_token %}
+        {{form}}
+        <input type="submit">
+    </form>
+{% endblock %}
