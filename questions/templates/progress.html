@@ -1,0 +1,13 @@
+<form method="GET" action="">
+    {{ form.as_p }}  <!-- Django가 자동으로 입력 폼을 만들어 줌 -->
+    <button type="submit">변경</button>
+</form>
+
+<div class="progress" style="height: 30px;">
+    <div class="progress-bar bg-primary" role="progressbar" 
+        style="width: {{ primary_percent|add:'%' }};" 
+         aria-valuenow="{{ primary_percent }}" 
+         aria-valuemin="0" aria-valuemax="100">
+        {{ primary_percent }}%
+    </div>
+</div>

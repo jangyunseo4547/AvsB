@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
-from .forms import QuestionForm, CommentForm
+from .forms import QuestionForm, CommentForm, ProgressForm
 from .models import Question, Comment
+import random
 
 # Create your views here.
 def create(request):
@@ -53,9 +54,16 @@ def comment_create(request, question_id):
         return redirect('questions:index')
 
 def progress_view(request):
-    
-    context = {
-        "primary_percent": primary_percent,  # 파란색 진행률
-        "danger_percent": danger_percent,   # 빨간색 진행률
-    }
+    form = ProgressForm(request.GET)  # GET 요청에서 데이터 가져오기
+    primary_percent = 60  # 기본값
+
+    if form.is_valid():
+        primary_percent = form.cleaned_data["percent"]
+
+    context = {"form": form, "primary_percent": primary_percent}
     return render(request, "progress.html", context)
+
+def random_link(request):
+    questions = Question.objects.all()
+    random_num = random.randint(1, len(questions))
+    return redirect('questions:detail', id=random_num)

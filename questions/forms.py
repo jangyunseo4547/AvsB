@@ -7,9 +7,9 @@ class QuestionForm(ModelForm):
         model = Question
         fields = '__all__'
         widgets = {
-            'title' : forms.TextInput(attrs={'class':'form-control'}),
-            'content1': forms.TextInput(attrs={'class':'form-control'}),
-            'content2': forms.TextInput(attrs={'class':'form-control'}),
+            'title' : forms.TextInput(attrs={'class':'form-control', 'placeholder':"질문을 입력하세요"}),
+            'content1': forms.TextInput(attrs={'class':'form-control', 'placeholder':"보기 A를 입력하세요"}),
+            'content2': forms.TextInput(attrs={'class':'form-control', 'placeholder':"보기 B를 입력하세요"}),
         }
 
 class CommentForm(ModelForm):
@@ -26,4 +26,7 @@ class CommentForm(ModelForm):
                 'class': 'form-control', 'rows':'3'
                 })
         }
+
+class ProgressForm(forms.Form):
+    percent = forms.IntegerField(min_value=0, max_value=100, initial=60, label="진행률 선택")
         

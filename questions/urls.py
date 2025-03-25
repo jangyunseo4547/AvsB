@@ -10,6 +10,6 @@ urlpatterns = [
 
     # comment create
     path('<int:question_id>/comments/create/', views.comment_create, name='comment_create'),
-
+    path('random/', views.random_link, name = 'random_link'),
 
 ]
